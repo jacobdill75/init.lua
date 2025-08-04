@@ -38,7 +38,7 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "lua_ls",
+                "lua_ls", "pyright", "clangd"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -59,7 +59,7 @@ return {
                                     -- NOTE: the value should be STRING!!
                                     defaultConfig = {
                                         indent_style = "space",
-                                        indent_size = "2",
+                                        indent_size = "4",
                                     }
                                 },
                             }
