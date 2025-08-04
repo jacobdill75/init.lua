@@ -1,0 +1,41 @@
+# Swap, backup, undo, and session files
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+*.old
+*.un~
+*.log
+
+# Undo and backup directories (if enabled)
+undo/
+backup/
+swap/
+session/
+
+# Lazy.nvim state and lock files
+lazy-lock.json
+**/lazy-lock.json
+lazy-lock.*.json
+
+# Packer plugin compiled file
+plugin/packer_compiled.lua
+
+# LSP logs and state
+.log/
+*.log
+
+# Node and Python artifacts (for plugin dev)
+node_modules/
+*.pyc
+__pycache__/
+
+# Local config overrides
+lua/**/local.lua
+lua/**/secrets.lua
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
