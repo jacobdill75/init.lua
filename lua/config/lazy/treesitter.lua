@@ -78,5 +78,11 @@ return {
                 on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
             }
         end
+    },
+
+    {
+        "RRethy/nvim-treesitter-endwise",
+        event = "InsertEnter",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
     }
 }
