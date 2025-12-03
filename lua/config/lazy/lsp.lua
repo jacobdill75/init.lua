@@ -23,6 +23,7 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        "folke/lazydev.nvim",
     },
 
     config = function()
@@ -47,6 +48,12 @@ return {
                     }
                 end,
 
+                ["clangd"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.clangd.setup {
+                        cmd = { "clangd", "--compile-commands-dir=." }
+                    }
+                end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
@@ -92,6 +99,11 @@ return {
         })
 
         vim.diagnostic.config({
+            virtual_text = true,
+            sings = true,
+            underline = true,
+            update_in_insert = false,
+            severity_sort = true,
             float = {
                 focusable = false,
                 style = "minimal",
@@ -99,6 +111,17 @@ return {
                 source = "always",
                 header = "",
                 prefix = "",
+            },
+        })
+
+        require("lazydev").setup({
+            ft = "lua", -- only load on lua files
+            opts = {
+                library = {
+                    -- See configuration section for more details
+                    -- -- Load luvit types when the `vim.uv` word is found
+                    { path = "${3rd{/luv/library", words = { "vim%.uv" } },
+                },
             },
         })
     end

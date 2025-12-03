@@ -24,8 +24,8 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
--- Toggle if including neotest
-vim.opt.signcolumn = "no"
+-- Toggle if including neotest or lspconfig diagnostic
+vim.opt.signcolumn = "yes"
 
 -- Tells neovim that ascii values from @ to @ are valid in file names
 -- Useful for frameworks like Vue.js that use @ in paths

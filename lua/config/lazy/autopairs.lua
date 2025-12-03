@@ -3,12 +3,27 @@ return {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         config = function()
-            require("nvim-autopairs").setup({})
+            local autopairs = require("nvim-autopairs")
+            local rule = require("nvim-autopairs.rule")
+
+            autopairs.setup({})
+
+            autopairs.add_rules({
+                rule("{", "}", {"cpp", "java", "c", "h", "hpp"})
+                    :replace_endpair(function(opts)
+                        if opts.line:match("^%s*class%s+")
+                            or opts.line:match("^%s*struct%s+")
+                            or opts.line:match("^%s*enum%s+") then
+                            return "};"
+                        end
+                        return "}"
+                    end)
+            })
 
             local cmp = require("cmp")
-            local autopairs = require("nvim-autopairs.completion.cmp")
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-            cmp.event:on("confirm_done", autopairs.on_confirm_done())
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end
     },
 
@@ -19,9 +34,9 @@ return {
             require("nvim-ts-autotag").setup({})
 
             local cmp = require("cmp")
-            local autopairs = require("nvim-autopairs.completion.cmp")
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-            cmp.event:on("confirm_done", autopairs.on_confirm_done())
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end
     }
 }
