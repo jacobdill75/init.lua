@@ -59,5 +59,20 @@ vim.keymap.set("n", "<leader>wpv", function() -- horizontal open explorer
     vim.cmd("Ex")
 end)
 
+vim.keymap.set("n", "<leader>wpf", function() -- horizontal open search
+    vim.cmd("vsplit")
+    vim.cmd("wincmd l")
+    vim.cmd("Ex")
+
+    local builtin = require("telescope.builtin")
+    local ok = pcall(builtin.git_files, { show_untracked = true })
+    if not ok then
+        builtin.find_files()
+    end
+end, {})
+
 -- Trying this out as I leave hlsearch on
 vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
+
+vim.keymap.set('n', '<leader>pd', '<cmd>DiffviewOpen<CR>', { desc = 'Open Diffview' })
+vim.keymap.set('n', '<leader>pc', '<cmd>DiffviewClose<CR>', { desc = 'Close Diffview' })
